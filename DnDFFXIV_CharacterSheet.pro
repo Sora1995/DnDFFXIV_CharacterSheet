@@ -10,6 +10,7 @@ CONFIG -= app_bundle
 SOURCES += \
         jobs.cpp \
         main.cpp \
+        races.cpp \
         randomDice.cpp
 
 # Default rules for deployment.
@@ -19,4 +20,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     jobs.h \
+    races.h \
     randomDice.h
