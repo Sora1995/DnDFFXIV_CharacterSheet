@@ -10,8 +10,9 @@ public:
     jobs();
 
     int jobSelection;
+    int confirmJob;
 
-    int confirmation();
+    int confirmation(int);
 
     void displayJobs();
 
