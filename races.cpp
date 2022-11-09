@@ -2,15 +2,82 @@
 //If they don't want the race chosen, then they can repick one.
 
 //AMB 11/7- Added all the races and their clan options
+//AMB 11/8- added confirmation and added logic to add to stats
 
 
 #include "races.h"
+#include "util.h"
 
+//default
 races::races()
 {
     raceSelection = -1;
+    clanSelection = " ";
+    walkingSpeed = 0;
+    raceAbilityScore = " ";
+    raceASIncreaseAmount = 0;
+    clanAbilityScore = " ";
+    clanASIncreaseAmount = 0;
 }
 
+//getters and setters
+//race
+void races::setRace(string race){
+    raceString = race;
+}
+string races::getRace(){
+    return raceString;
+}
+
+//clan
+void races::setClan(string clan){
+    clanSelection = clan;
+}
+string races::getClan(){
+    return clanSelection;
+}
+
+//race ability score
+void races::setRaceAbilityScore(string raceAS){
+    raceAbilityScore = raceAS;
+}
+string races::getRaceAbilityScore(){
+    return raceAbilityScore;
+}
+
+//race ability score increase amount
+void races::setRaceASIncreaseAmount(int raceASIncrease){
+    raceASIncreaseAmount = raceASIncrease;
+}
+int races::getRaceASIncreaseAmount(){
+    return raceASIncreaseAmount;
+}
+
+//clan ability score
+void races::setClanAbilityScore(string clanAS){
+    clanAbilityScore = clanAS;
+}
+string races::getClanAbilityScore(){
+    return clanAbilityScore;
+}
+
+//clan ability score increase amount
+void races::setClanASIncreaseAmount(int clanASIncrease){
+    clanASIncreaseAmount = clanASIncrease;
+}
+int races::getClanASIncreaseAmount(){
+    return clanASIncreaseAmount;
+}
+
+//walking speed
+void races::setWalkingSpeed(int speed){
+    walkingSpeed = speed;
+}
+int races::getWalkingSpeed(){
+    return walkingSpeed;
+}
+
+//display the races to the user to choose from
 void races::displayRaces() {
     cout << "Please select a race from the list below: " << endl;
     cout << "1. Au Ra" << endl;
@@ -19,19 +86,29 @@ void races::displayRaces() {
     cout << "4. Miqo'te" << endl;
     cout << "5. Viera" << endl;
 
-    //AMB - TODO: add try/catch to catch if the user enters a wrong input type.
     cin >> raceSelection;
-    while(raceSelection < 1 || raceSelection > 5) {
-        cout << "Invalid selection, please try again." << endl;
+
+    //if wrong input type is inputed by user
+    while(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Invalid input, please use digits." << endl;;
         cin >> raceSelection;
+    }
+
+    //if the number entered is out of range
+    while(raceSelection < 1 || raceSelection > 5) {
+        cout << "Invalid Selection, please try again..." << endl;
+        continue;
     }
 
     listRaces(raceSelection);
 }
 
 void races::listRaces(int race) {
-    switch(race){
-    case 1 : //Au Ra
+
+    if(race == 1){  //Au Ra
+        raceString = "Au Ra";
         cout << endl << "You have chosen Au Ra. The Au Ra hail from the east, and are marked by their scales and horns. These people have a stark difference in height between the the males and females of the species. The males tend to be much taller than the females and many other races, while the females on average are shorter than many of the other races." << endl;
         cout << endl << "Within the Au Ra there are two clans, Xaela and Raen." << endl;
         cout << "The dark scaled Xaela are nomads who travel the Azim Steppe and have developed a wide variety of customs which change from tribe to tribe." << endl;
@@ -47,21 +124,63 @@ void races::listRaces(int race) {
             cin >> clanSelection;
         }
 
-        //AMB - TO-DO: add confirmation
-        //AMB - TO-DO: Add Logic to increase ability scores when the slection is confirmed.
+        //AMB 11/8- Added confirmation and logic to increase the ability scores.
+        raceConfirm = raceConfirmation(raceString, clanSelection);
 
-        break;
+            switch(raceConfirm){
+                case 1 : //confirmed selection
+                    cout << "You have confirmed the race selection of " << raceString << " with the clan " << clanSelection << "."  << endl;
 
-    case 2 : //Hyur
+                    walkingSpeed = 30;
+                    raceAbilityScore = "Wisdom";
+                    raceASIncreaseAmount = 2;
+
+                    if (clanSelection == "Xaela"){
+                        clanAbilityScore = "Strength";
+                        clanASIncreaseAmount = 2;
+                    } else {
+                        clanAbilityScore = "Charisma";
+                        clanASIncreaseAmount = 1;
+                    }
+                break;
+
+                case 2 : //wants to reselect race and clan
+                    cout << "Please reselect your race and clan." << endl;
+                    displayRaces();
+                break;
+
+                default : //default
+                    cout << "Invalid selection." << endl;
+                break;
+            }
+    }else if(race == 2) { //Hyur
+        raceString = "Hyur";
+        string increaseChoiceString = " ";
         cout << "You have chosen Hyur. The Hyur have spread across the entirety of the world, making it difficult to trace what their homeland truly is. There are the average sized Midlanders, named for the elevation in which their sub species lived for many years, and the taller, more muscular highlanders, who lived in the high mountains for their declared homeland."  << endl << endl;
 
         cout << "With the Hyur race, you get to choose what your ability score increase is. Your base walking speed is 30ft." << endl;
         cout << " Choose an ability score to increase by 1:" << endl;
         cout << "1. Strength" << endl << "2. Dexterity" << endl << "3. Constitution" << endl << "4. Intelligence" << endl << "5. Wisdom" << endl << "6. Charisma" << endl;
         cin >> increaseChoice;
-        while (increaseChoice < 1 || increaseChoice > 5){
-            cout << "Invalid selection, please try again.";
+
+        while(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, please use digits." << endl;;
             cin >> increaseChoice;
+        }
+
+        while(increaseChoice < 1 || increaseChoice > 5) {
+            cout << "Invalid Selection, please try again..." << endl;
+        }
+
+        switch(increaseChoice){
+            case 1: increaseChoiceString = "Strength"; break;
+            case 2: increaseChoiceString = "Dexterity"; break;
+            case 3: increaseChoiceString = "Constitution"; break;
+            case 4: increaseChoiceString = "Intelligence"; break;
+            case 5: increaseChoiceString = "Wisdom"; break;
+            case 6: increaseChoiceString = "Charisma"; break;
         }
 
         cout << endl;
@@ -69,18 +188,47 @@ void races::listRaces(int race) {
         cout << "Within the Hyur race there are two clans, Midlander and Highlander." << endl;
         cout << "Midlander's ability score, intelligence, increases by 2. Highlander's ability score, strength, increases by 2." << endl;
         cout << "Choose a clan to align with... 'Midlander' or 'Highlander': " << endl;
+
         cin >> clanSelection;
         while (clanSelection != "Midlander" && clanSelection != "Highlander"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
             cin >> clanSelection;
         }
 
-        //AMB - TO-DO: add confirmation
-        //AMB - TO-DO: Add Logic to increase ability scores when the slection is confirmed.
+        //AMB 11/8- Added confirmation and logic to increase the ability scores.
+        raceConfirm = raceConfirmation(raceString, clanSelection);
 
+        switch(raceConfirm){
+
+        case 1 : //confirmed selection
+            cout << "You have confirmed the race selection of " << raceString << " with the clan " << clanSelection << "."  << endl;
+
+            //set scores/stats
+            walkingSpeed = 30;
+            raceAbilityScore = increaseChoiceString;
+            raceASIncreaseAmount = 1;
+
+            if (clanSelection == "Midlander"){
+                clanAbilityScore = "Intelligence";
+                clanASIncreaseAmount = 2;
+            } else {
+                clanAbilityScore = "Strength";
+                clanASIncreaseAmount = 2;
+            }
         break;
 
-    case 3 : //Lalafell
+        case 2 : //wants to reselect race and clan
+            cout << "Please reselect your race and clan." << endl;
+            displayRaces();
+            break;
+
+        default : //default
+            cout << "Invalid selection." << endl;
+            break;
+        }
+    } else if(race == 3){ //Lalafell
+        raceString = "Lalafell";
+
         cout << "You have chosen Lalafell. A dimunitive race, the Lalafell immigrated from Southern islands to Eorzea forming two distinct groups based on the geography their ancestors settled in. " << endl;
         cout << "Within the Lalafell race there are two clans, Plainsfolk and Dunesfolk." << endl;
         cout << "The darker skinned Dunesfolk formed the city state of Ul'dah in the deserts of Thanalan, while the lighter skinned Planesfolk settled and farmed the lands of La Noscea, a large island off the mainland of Eorzea." << endl;
@@ -96,12 +244,39 @@ void races::listRaces(int race) {
             cin >> clanSelection;
         }
 
-        //AMB - TO-DO: add confirmation
-        //AMB - TO-DO: Add Logic to increase ability scores when the slection is confirmed.
+        //AMB 11/8- Added confirmation and logic to increase the ability scores.
+        raceConfirm = raceConfirmation(raceString, clanSelection);
+        switch(raceConfirm){
+            case 1 : //confirmed selection
+                cout << "You have confirmed the race selection of " << raceString << " with the clan " << clanSelection << "."  << endl;
 
-        break;
+                //set scores/stats
+                walkingSpeed = 25;
 
-    case 4: // Miqo'te
+                raceAbilityScore = "Charisma";
+                raceASIncreaseAmount = 1;
+
+                if (clanSelection == "Plainsfolk"){
+                    clanAbilityScore = "Dexterity";
+                    clanASIncreaseAmount = 1;
+                } else {
+                    clanAbilityScore = "Intelligence";
+                    clanASIncreaseAmount = 1;
+                }
+            break;
+            case 2 : //wants to reselect race and clan
+                cout << "Please reselect your race and clan." << endl;
+                displayRaces();
+            break;
+            default : //default
+                cout << "Invalid selection." << endl;
+            break;
+        }
+    } else if(race == 4){
+
+
+        raceString = "Miqo'te";
+
         cout << "You have chosen Miqo'te. The Miqo'te are a second group of feline people who traveled to Eorzea across a frozen sea long ago. These proud people find pride in their natural hunting ability and have split into two distinct ethnic groups who worship the sun and moon respectively." << endl;
         cout << "The Seekers of the Sun live in warmer clients in patriarchal societies." << endl;
         cout << "The Keepers of the Moon live in dense forests, their tribes centering on matriarchs. " << endl << endl;
@@ -116,11 +291,37 @@ void races::listRaces(int race) {
             cin >> clanSelection;
         }
 
-        //AMB - TO-DO: add confirmation
-        //AMB - TO-DO: Add Logic to increase ability scores when the slection is confirmed.
-        break;
+        //AMB 11/8- Added confirmation and logic to increase the ability scores.
+        raceConfirm = raceConfirmation(raceString, clanSelection);
 
-    case 5: //Viera
+        switch(raceConfirm){
+            case 1 : //confirmed selection
+                cout << "You have confirmed the race selection of " << raceString << " with the clan " << clanSelection << "."  << endl;
+
+                walkingSpeed = 30;
+
+                raceAbilityScore = "Wisdom";
+                raceASIncreaseAmount = 2;
+
+                if (clanSelection == "Sun"){
+                    clanAbilityScore = "Charisma";
+                    clanASIncreaseAmount = 1;
+                } else {
+                    clanAbilityScore = "Moon";
+                    clanASIncreaseAmount = 1;
+                }
+            break;
+            case 2 : //wants to reselect race and clan
+                cout << "Please reselect your race and clan." << endl;
+                displayRaces();
+            break;
+            default : //default
+                cout << "Invalid selection." << endl;
+            break;
+        }
+    } else if(race == 5){
+        raceString = "Viera";
+
         cout << "You have chosen Viera. The Viera are lapine people who live in dense forests and act as the protectors of their home. With their more secluded nature, they generally avoid contact with the outside world, happily protecting the Golmore Jungles and Skatay Range, both found in the east. " << endl;
         cout << "There are two distinct groups of Viera who developed slightly differently based on their homes. The Rava having darker skin while the Veena have far fairer skin, both groups blending into their respective environments better thanks to these adaptations."  << endl << endl;
 
@@ -134,12 +335,62 @@ void races::listRaces(int race) {
             cin >> clanSelection;
         }
 
-        //AMB - TO-DO: add confirmation
-        //AMB - TO-DO: Add Logic to increase ability scores when the slection is confirmed.
-        break;
+        //AMB 11/8- Added confirmation and logic to increase the ability scores.
+        raceConfirm = raceConfirmation(raceString, clanSelection);
+        switch(raceConfirm){
+            case 1 : //confirmed selection
+                cout << "You have confirmed the race selection of " << raceString << " with the clan " << clanSelection << "."  << endl;
 
-    default : //default
+                walkingSpeed = 35;
+
+                raceAbilityScore = "Dexterity";
+                raceASIncreaseAmount = 2;
+
+                if (clanSelection == "Rava"){
+                    clanAbilityScore = "Wisdom";
+                    clanASIncreaseAmount = 1;
+                } else {
+                    clanAbilityScore = "Intelligence";
+                    clanASIncreaseAmount = 1;
+                }
+            break;
+            case 2 : //wants to reselect race and clan
+                cout << "Please reselect your race and clan." << endl;
+                displayRaces();
+            break;
+            default : //default
+                cout << "Invalid selection." << endl;
+            break;
+        }
+
+    } else { //default
         cout << "Invalid selection." << endl;
-        break;
     }
 }
+
+//confirms the race to user and returns a 1 for yes and 2 for no
+int races::raceConfirmation(string race, string clan){
+    int raceConfirm = 3;
+
+    //AMB to-do: add try/catch to make sure input is an int
+    cout << "Your selected race is: " << race << endl << "Your selected clan is: " << clan << endl;
+    cout << "Would you like to confirm this selection?" << endl << "1. Yes, confirm my selection." << endl << "2. No, I would like to reselect my race and clan." << endl;
+    cin >> raceConfirm;
+
+    //checks if the input is the correct input type
+    while(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Invalid input, please use digits." << endl;;
+        cin >> raceConfirm;
+    }
+
+    //checks to see if input is in range
+        while(raceConfirm < 1 || raceConfirm > 2) {
+            cout << "Invalid Selection, please try again..." << endl;
+        }
+
+    return raceConfirm;
+}
+
+
