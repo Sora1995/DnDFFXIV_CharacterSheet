@@ -11,6 +11,7 @@ public:
 
     int jobSelection;
     int confirmJob;
+    string finalJob;
 
     int confirmation(int);
 
@@ -18,6 +19,8 @@ public:
 
     void viewList(int);
 
+    void setJob(string);
+    string getJob();
 
 };
 

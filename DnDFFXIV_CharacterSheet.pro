@@ -10,6 +10,7 @@ CONFIG -= app_bundle
 SOURCES += \
         jobs.cpp \
         main.cpp \
+        names.cpp \
         races.cpp \
         randomDice.cpp
 
@@ -20,5 +21,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     jobs.h \
+    names.h \
     races.h \
     randomDice.h
