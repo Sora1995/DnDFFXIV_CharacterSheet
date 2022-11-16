@@ -10,24 +10,52 @@ int main() {
     races Race;
     jobs job;
     names name;
+    string characterName;
+    string characterSex;
 
     cout << "Hello! Welcome to the Dungons and Dragons x Final Fantasy XIV Character Creator! To get started, first pick your race from the list below:" << endl;
     Race.displayRaces();
+    string characterRace = Race.getRace(); //set local variables
+    string characterClan = Race.getClan(); //set local variables
 
     cout << "Great! Next, pick your job from the list below." << endl;
     job.displayJobs();
 
+    cin.ignore();
+    cout << "Is your character male or female?" << endl << "m for male " << endl << "f for Female" << endl;
+    cin >> characterSex;
+
+    while(characterSex != "f" && characterSex != "m" ){
+        cout << "Invalid selection, try again..." << endl;
+        cin >> characterSex;
+    }
+
+
     cout << "Now, let's pick our name." << endl;
-    name.displayNameGenerator();
+    int nameChoice = name.displayNameGenerator();
+
+    if(nameChoice == 1){
+        cout << "Enter the name of your character: ";
+        cin >> characterName;
+        name.setCharacterName(characterName);
+    } else if(nameChoice == 2){
+        cout << "Generating random name." << endl;
+        characterName = name.randomName(characterRace, characterClan, characterSex);
+        name.setCharacterName(characterName);
+    } else {
+        cout << "Invalid choice" << endl;
+    }
 
     cout << "Finally, let's roll the dice to see what your stats will be." << endl;
-    randomDice();
+    cout << "4 6 sided dice will be rolled, lowest number dropped. The rest will be added together, and the user will choose what stat they want it to go in." << endl;
+    //randomDice();
 
 
 
     //AMB- 11/9 added a summary print of the character's information in the future
-    cout << "Here is your character: " << endl;
+    cout << endl << "Here is your character: " << endl;
     cout << "Character name: " << name.getCharacterName() << endl;
+    cout << "Character sex: " << characterSex << endl;
     cout << "Race: " << Race.getRace() << endl;
     cout << "Job: " << job.getJob() << endl;
     cout << "Level: 1" << endl;

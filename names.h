@@ -8,12 +8,13 @@ class names
 public:
     names(); //constructor
 
-    void displayNameGenerator();
+    int displayNameGenerator();
 
     string getCharacterName();
     void setCharacterName(string);
 
-    string randomName();
+    string randomName(string, string, string);
+    string chosenName();
 private:
     string name;
 };
