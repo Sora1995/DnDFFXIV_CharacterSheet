@@ -77,9 +77,9 @@ string names::randomName(string race, string clan, string sex){
     vector<string> dunesFNames{"Ejaja Eja", "Babayi Bayi", "Rerega Rega", "Chochosha Chosha", "Bobochu Bochu", "Lelepu Lepu"};
 
     //Miqo'te names in vectors
-
-    vector<string> sunMNames{"I'wheto", "S'ciwah", "Q'tuja", "P'fhemeh", "I'chelu", "B'cuhguh", "S'tohm", "S'ghut", "M'bod", "I'phur"};
-    vector<string> sunFNames{"C'nhamfaule", "C'qhaalkamo", "D'mhagsoo", "G'ganni", "H'yhaafoqu", "J'gidhiju", "K'jotnhu", "L'keknhegu", "M'yhaiabdu", "N'zhamroli"};
+    vector<string> sunFfchar{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    vector<string> sunMNames{"wheto", "ciwah", "tuja", "fhemeh", "chelu", "cuhguh", "tohm", "ghut", "bod", "phur"};
+    vector<string> sunFNames{"nhamfaule", "qhaalkamo", "mhagsoo", "ganni", "yhaafoqu", "gidhiju", "jotnhu", "keknhegu", "yhaiabdu", "zhamroli"};
     vector<string> moonMNames{"Axah'a", "Gohkoh'to", "Luhga'li", "Mahgeh'sae", "Mucih'ra", "Nohpu'ir", "Sahxa'wo", "Suleh'ya", "Vehse'zi", "Wizo'tan"};
     vector<string> moonFNames{"Nuhmu", "Ota", "Pehbi", "Vehba", "Yaba", "Miko", "Fafoh", "Cehxi", "Xarih", "Ecih"};
 
@@ -144,9 +144,9 @@ string names::randomName(string race, string clan, string sex){
     } else if(race == "Miqo'te"){
         if(clan == "Sun"){
             if(sex == "m"){
-                firstName = sunMNames.at(rand() % sunMNames.size());
+                firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunMNames.at(rand() % sunMNames.size());
             } else if(sex == "f"){
-                firstName = sunFNames.at(rand() % sunFNames.size());
+                firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunFNames.at(rand() % sunFNames.size());
             }
 
         } else if(clan == "Moon"){
