@@ -2,24 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#define MAX_STAT
+#include <randomDice.h>
 
+randomDice::randomDice() {
 
-enum {
-    STR, DEX, INT, CON, WIS, CHA, LEVEL, MAX_STAT
-};
-struct Character {
-    int level;
-    int jobs;
-    int HP;
-    int bonus[8];
-    int stats[MAX_STAT];
-};
-struct Character myCharacter;
-void roll_stat(int *stat_to_be_rolled);
-void get_bonus(int *bonus_to_be_calculated, int base_stat);
-int roll_hp(int char_level);
-int main(void)
+}
+
+int randomDice::printStat()
 {
     /* Declare stat variables */
     char stats_label[7][6];
@@ -37,8 +26,7 @@ int main(void)
     strcpy(stats_label[5], "Wis");
     strcpy(stats_label[6], "Cha");
     while (!accept) {
-    /* prompt and read in level */
-    printf("Please enter Level: ");
+    /* read in level */
     scanf("%d", &myCharacter.stats[0]);
     /* roll stats */
     for (stat_loop = 1; stat_loop < 7; stat_loop++)
@@ -70,7 +58,7 @@ int main(void)
 }
 
 /* Roll 4d6 and drop lowest */
-void roll_stat(int *stat_to_be_rolled)
+void randomDice::roll_stat(int *stat_to_be_rolled)
 {
     int dice1, dice2, dice3, dice4, total;
     /* Roll 4d6 */
@@ -92,7 +80,7 @@ void roll_stat(int *stat_to_be_rolled)
 }
 
 /* This was extracted as a function to make the bonus loop more compact */
-void get_bonus(int *bonus_to_be_calculated, int base_stat)
+void randomDice::get_bonus(int *bonus_to_be_calculated, int base_stat)
 {
     if (base_stat > 9)
     *bonus_to_be_calculated = (base_stat - 10) / 2;
@@ -101,7 +89,7 @@ void get_bonus(int *bonus_to_be_calculated, int base_stat)
 }
 
 /* This was extracted as a function to make the HP loop more compact */
-int roll_hp(int char_level)
+int randomDice::roll_hp(int char_level)
 {
     int hploop = 0, hp = 0;
     /* printf("Leve1: %d", char_level); For testing */
