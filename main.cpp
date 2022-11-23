@@ -10,6 +10,7 @@ int main() {
     races Race;
     jobs job;
     names name;
+    randomDice diceRolls;
     string characterName;
     string characterSex;
 
@@ -47,8 +48,8 @@ int main() {
     }
 
     cout << "Finally, let's roll the dice to see what your stats will be." << endl;
-    cout << "4 6 sided dice will be rolled, lowest number dropped. The rest will be added together, and the user will choose what stat they want it to go in." << endl;
-    //randomDice();
+    //cout << "Enter 1, to begin" << endl;
+    //diceRolls.printStat();
 
 
 
@@ -61,7 +62,7 @@ int main() {
     cout << "Level: 1" << endl;
     cout << endl;
 
-    cout << "Character stats: " << endl << endl;
+    cout << "Character stats: " << endl;
     cout << endl << "Strength: ";
     if(Race.getClanAbilityScore() == "Strength"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
@@ -110,28 +111,24 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Profiency bonus: " << endl;
+    cout << endl << "Profiency bonus: " << job.getProfiencyBonus() << endl;
 
-    cout << endl << "Saving throw: " << endl;
-    cout << "Strength: " << endl;
-    cout << "Dexterity: " << endl;
-    cout << "Constitution: " << endl;
-    cout << "Intelligence: " << endl;
-    cout << "Wisdom: " << endl;
-    cout << "Charisma: " << endl;
+    cout << endl << "Saving throws: " << job.getSavingThrows() << endl;
 
     cout << endl << "Spells" << endl;
     //list spells here
 
-    cout << endl << "Skills: " << endl;
-    //list skills here
+    cout << endl << "Skills: " << job.getSkills() << endl;
 
-    cout << endl << "Armor class: " << endl;
-    cout << endl << "Initiative: " << endl;
+    cout << endl << "Hit Point Dice: " << job.getHitDice() << endl;
+    //placeholder for pulling constitution for hit point calculation
+    job.setConPoints(0);
+    cout << endl << "Current Hit Points: " << job.getHitPoints() << endl;
     cout << endl << "Speed: " << Race.getWalkingSpeed() << "ft " << endl;
 
-    cout << endl << "Equipment: " << endl;
-    //list equipment here
+    cout << endl << "Equipment: " << job.getStartingEquipment() << endl;
+
+    cout << "Enjoy your character! " << endl;
 
 }
 

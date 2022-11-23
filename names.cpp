@@ -145,8 +145,10 @@ string names::randomName(string race, string clan, string sex){
         if(clan == "Sun"){
             if(sex == "m"){
                 firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunMNames.at(rand() % sunMNames.size());
+                lastName = "Tia"; //all last names of males in the seekers of the sun are Tia
             } else if(sex == "f"){
                 firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunFNames.at(rand() % sunFNames.size());
+                lastName = sunMNames.at(rand() % sunMNames.size()); //last names for female seekers are the first name of breeding male
             }
 
         } else if(clan == "Moon"){
