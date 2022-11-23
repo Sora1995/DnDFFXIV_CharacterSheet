@@ -1,4 +1,5 @@
 #include "jobs.h"
+#include <limits>
 
 
 jobs::jobs()

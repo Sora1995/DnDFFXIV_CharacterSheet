@@ -6,6 +6,7 @@
 
 
 #include "races.h"
+#include <limits>
 
 //default
 races::races()

@@ -9,13 +9,10 @@ using namespace std;
 class randomDice
 {
     enum {
-        STR, DEX, INT, CON, WIS, CHA, LEVEL, MAX_STAT
+        STR, DEX, INT, CON, WIS, CHA, MAX_STAT
     };
     struct Character {
         int level = 1;
-        int jobs;
-        int HP;
-        int bonus[8];
         int stats[MAX_STAT];
     };
 
@@ -23,9 +20,7 @@ class randomDice
 public:
 
     randomDice();
-    int printStat();
-    int roll_hp(int);
-    void get_bonus(int*, int);
+    void printStat();
     void roll_stat(int*);
 };
 
