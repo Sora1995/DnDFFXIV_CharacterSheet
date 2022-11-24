@@ -13,7 +13,6 @@ int main() {
     randomDice diceRolls;
     string characterName;
     string characterSex;
-    randomDice diceRolls;
 
     cout << "Hello! Welcome to the Dungons and Dragons x Final Fantasy XIV Character Creator! To get started, first pick your race from the list below:" << endl;
     Race.displayRaces();
@@ -48,9 +47,8 @@ int main() {
         cout << "Invalid choice" << endl;
     }
 
-    cout << "Finally, let's roll the dice to see what your stats will be." << endl;
-    //cout << "Enter 1, to begin" << endl;
-    //diceRolls.printStat();
+//    cout << "Finally, let's roll the dice to see what your stats will be." << endl;
+//    diceRolls.printStat();
 
 
 

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -10,6 +12,7 @@ randomDice::randomDice() {
 
 void randomDice::printStat()
 {
+    //int userInput;
     /* Declare stat variables */
     char stats_label[6][6];
     /* = "Str", "Dex", "Con", "Int", "Wis", "Cha"; */
@@ -27,11 +30,26 @@ void randomDice::printStat()
     /* roll stats */
     for (stat_loop = 0; stat_loop < 6; stat_loop++)
         roll_stat(&myCharacter.stats[stat_loop]);
+    cout << "First, let's print out the random dice rolls." << endl;
+
+    for (stat_loop= 0; stat_loop < 6; stat_loop++) {
+        cout << myCharacter.stats[stat_loop] << endl;
+    }
+
+    cout << "Now, let's pick where you want your stat allocated. You cannot adjust your stats once you accept, so be sure you pick the one you want!" << endl;
+    for (stat_loop= 0; stat_loop < 6; stat_loop++) {
+        cout << stats_label[stat_loop];
+
+    }
+
+
     /* print stats in required formatted block */
-    printf("%s: %d ", stats_label[0], myCharacter.stats[0]);
-    for (stat_loop = 0; stat_loop < 5; stat_loop++)
-        printf("%s: %d ", stats_label[stat_loop],
-               myCharacter.stats[stat_loop]);
+
+
+    //printf("%s: %d ", stats_label[0], myCharacter.stats[0]);
+    //for (stat_loop = 1; stat_loop < 5; stat_loop++)
+    //   printf("%s: %d ", stats_label[stat_loop],
+    //         myCharacter.stats[stat_loop]);
 }
 
 /* Roll 4d6 and drop lowest */

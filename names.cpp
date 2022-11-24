@@ -59,6 +59,9 @@ string names::randomName(string race, string clan, string sex){
                             "Khalja", "Charakha", "Khaishan", "Chigu", "Jebke", "Cirina", "Narangerel", "Ogul", "Altan"};
     vector<string> XaelaFNames{"Boragchin", "Narengawa", "Chotan", "Qoyar", "Khorchi", "Ogul", "Checheyigen", "Altun", "Eji",
                             "Baguchi", "Odchigin", "Khorghosun", "Yesun", "Ariunbold", "Bayar"};
+    vector<string>clanNames{"Adarkim", "Angura", "Arulaq", "Avagnar", "Bairon", "Bayaqud", "Bolir", "Borlaa", "Buduga", "Dalamiq", "Iriq", "Jhungid", "Kharlu", "Khatayin", "Malqir", "Mankhad", "Mierqid",
+                             "Noykin", "Olkund", "Dazkar", "Oronir", "Oroq", "Qerel", "Torgud", "Tumet", "Ugund", "Uyagir", "Dhoro", "Orben", "Ejinn", "Dotharl", "Hotgo", "Sagahl", "Kahkol", "Kha", "Mol", "Gesi",
+                             "Kagon", "Goro", "Gharl", "Dataq", "Haragin", "Ura", "Moks", "Geneq", "Horo", "Himaa", "Malaguld", "Urumet", "Qalli"};
 
     vector<string> familyNames{"Yuzuka", "Obinata", "Yuzuka", "Yatsurugi", "Rokuyari", "Godo", "Tabito", "Yumishi", "Musa"};
 
@@ -98,6 +101,8 @@ string names::randomName(string race, string clan, string sex){
             } else if(sex == "f"){
                 firstName = raenFNames.at(rand() % raenFNames.size());
             }
+            //randomize surname
+            lastName = familyNames.at(rand() % familyNames.size());
 
         } else if(clan == "Xaela"){
             if(sex == "m"){
@@ -105,8 +110,10 @@ string names::randomName(string race, string clan, string sex){
             } else if(sex == "f"){
                 firstName = XaelaFNames.at(rand() % XaelaFNames.size());
             }
+             //randomize surname
+            lastName = clanNames.at(rand() % clanNames.size());
         }
-            lastName = familyNames.at(rand() % familyNames.size());
+
     } else if(race == "Hyur") {
         if(clan == "Midlander"){
             if(sex == "m"){
