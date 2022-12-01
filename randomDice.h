@@ -8,20 +8,36 @@ using namespace std;
 
 class randomDice
 {
-    enum {
-        STR, DEX, INT, CON, WIS, CHA, MAX_STAT
-    };
-    struct Character {
-        int level = 1;
-        int stats[MAX_STAT];
-    };
-
-    struct Character myCharacter;
 public:
+
+    string strStat;
+    string dexStat;
+    string intStat;
+    string conStat;
+    string wisStat;
+    string chaStat;
+
+    void setStrStat(string);
+    string getStrStat();
+
+    void setDexStat(string);
+    string getDexStat();
+
+    void setIntStat(string);
+    string getIntStat();
+
+    void setConStat(string);
+    string getConStat();
+
+    void setWisStat(string);
+    string getWisStat();
+
+    void setChaStat(string);
+    string getChaStat();
 
     randomDice();
     void printStat();
-    void roll_stat(int*);
+    int roll_stat();
 };
 
 #endif // RANDOMDICE_H

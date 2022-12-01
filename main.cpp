@@ -47,8 +47,8 @@ int main() {
         cout << "Invalid choice" << endl;
     }
 
-//    cout << "Finally, let's roll the dice to see what your stats will be." << endl;
-//    diceRolls.printStat();
+    cout << "Finally, let's roll the dice to see what your stats will be." << endl;
+   diceRolls.printStat();
 
 
 
@@ -62,7 +62,7 @@ int main() {
     cout << endl;
 
     cout << "Character stats: " << endl;
-    cout << endl << "Strength: ";
+    cout << endl << "Strength: " << diceRolls.getStrStat();
     if(Race.getClanAbilityScore() == "Strength"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
@@ -70,7 +70,7 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Dexterity: ";
+    cout << endl << "Dexterity: " << diceRolls.getDexStat();
     if(Race.getClanAbilityScore() == "Dexterity"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
@@ -78,7 +78,7 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Constitution: ";
+    cout << endl << "Constitution: " << diceRolls.getConStat();
     if(Race.getClanAbilityScore() == "Constitution"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
@@ -86,7 +86,7 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Intelligence: ";
+    cout << endl << "Intelligence: " << diceRolls.getIntStat();
     if(Race.getClanAbilityScore() == "Intelligence"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
@@ -94,7 +94,7 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Wisdom: ";
+    cout << endl << "Wisdom: " << diceRolls.getWisStat();
     if(Race.getClanAbilityScore() == "Wisdom"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
@@ -102,7 +102,7 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
-    cout << endl << "Charisma: ";
+    cout << endl << "Charisma: " << diceRolls.getChaStat();
     if(Race.getClanAbilityScore() == "Charisma"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
     }
