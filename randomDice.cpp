@@ -7,6 +7,7 @@
 #include <randomDice.h>
 #include <map>
 #include <algorithm>
+#include <string>
 
 randomDice::randomDice() {
 
