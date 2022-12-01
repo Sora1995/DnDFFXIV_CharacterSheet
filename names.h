@@ -11,9 +11,10 @@ public:
     int displayNameGenerator();
 
     string getCharacterName();
+    void setCharacterName(string, string);
     void setCharacterName(string);
 
-    string randomName(string, string, string);
+    void randomName(string, string, string);
     string chosenName();
 private:
     string name;

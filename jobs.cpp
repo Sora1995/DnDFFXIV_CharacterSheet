@@ -1,21 +1,26 @@
 #include "jobs.h"
 #include <limits>
+#include <algorithm>
 
 
 jobs::jobs()
 {
     jobSelection = -1;
-    finalJob = "-";
+    finalJob = "N/A";
     confirmJob = -1;
-    hitDice = "-";
+    hitDice = "N/A";
     hitPoints = 0;
-    savingThrows1 = "-";
-    savingThrows2 = "-";
+    savingThrows1 = "N/A";
+    savingThrows2 = "N/A";
     conPoints = 0;
-    skills = " ";
-    startingEquipment = "-";
-    proficiencyBonus = "-";
+    skills = "N/A";
+    startingEquipment = "N/A";
+    proficiencyBonus = "N/A";
+    spells = "N/A";
+    cantrips = "N/A";
+    cardDraw = "N/A";
 }
+
 
 void jobs::setJob(string chosenJob){finalJob = chosenJob;}
 string jobs::getJob(){return finalJob;}
@@ -33,7 +38,7 @@ void jobs::setHitDice(string hitDice){ this->hitDice = hitDice;}
 string jobs::getHitDice(){ return hitDice;}
 
 void jobs::setHitPoints(int hitPoints) { this->hitPoints = hitPoints;}
-int jobs::getHitPoints(){return hitPoints;}
+int jobs::getHitPoints(){int updatedHitPoints = hitPoints + conPoints; return updatedHitPoints;}
 
 void jobs::setConPoints(int conPoints){this->conPoints = conPoints;}
 int jobs::getConPoints(){return conPoints;}
@@ -43,6 +48,10 @@ string jobs::getStartingEquipment(){return startingEquipment;}
 string jobs::getProfiencyBonus(){return proficiencyBonus;}
 
 string jobs::getSkills(){return skills;}
+
+void jobs::setCantrips(string cantrips){this->cantrips = cantrips;}
+void jobs::setSpells(string spells){this->spells = spells;}
+void jobs::setCardDraw(string cardDraw){this->cardDraw = cardDraw;}
 
 void jobs::displayJobs() {
     cout << "Please select a job from the list below: " << endl;
@@ -78,8 +87,8 @@ void jobs::viewList(int job) {
             cout << "Your job is Astrologian." << endl;
             //AMB 11/22 - added confirmation stats
             finalJob = "Astrologian";
-            hitPoints = 8 + this->conPoints;
             hitDice = "1d8";
+            setHitPoints(8);
             savingThrows1 = "WIS";
             savingThrows2 = "CHA";
             proficiencyBonus = "+2";
@@ -90,7 +99,8 @@ void jobs::viewList(int job) {
             skills = astSkills();
             cout << "Your skills are: " + skills << endl;
 
-            //TO-DO: astrologian cantrips?
+            //have user choose cantrips;
+            astCantrips();
 
         } else if (confirmJob == 2){
             cout << "Returning to the list..." << endl;
@@ -107,7 +117,7 @@ void jobs::viewList(int job) {
             cout << "Your job is Black Mage." << endl;
             //AMB 11/22 - added confirmation stats
             finalJob = "Black Mage";
-            hitPoints = 6 + this->conPoints;
+            setHitPoints(6);
             hitDice = "1d6";
             savingThrows1 = "INT";
             savingThrows2 = "WIS";
@@ -120,6 +130,7 @@ void jobs::viewList(int job) {
             cout << "Your skills are: " + skills << endl;
 
             //TO-DO: black mage cantrips?
+            blmCantripsSpells();
 
         } else if(confirmJob == 2){
             cout << "Returning to the list..." << endl;
@@ -136,7 +147,7 @@ void jobs::viewList(int job) {
             cout << "Your job is Dancer." << endl;
             //AMB 11/22 - added confirmation stats
             finalJob = "Dancer";
-            hitPoints = 8 + this->conPoints;
+            setHitPoints(8);
             hitDice = "1d8";
             savingThrows1 = "DEX";
             savingThrows2 = "CHA";
@@ -164,7 +175,7 @@ void jobs::viewList(int job) {
             cout << "Your job is Gunbreaker." << endl;
             //AMB 11/22 - added confirmation stats
             finalJob = "Gunbreaker";
-            hitPoints = 10 + this->conPoints;
+            setHitPoints(10);
             hitDice = "1d10";
             savingThrows1 = "STR";
             savingThrows2 = "DEX";
@@ -195,7 +206,7 @@ void jobs::viewList(int job) {
             cout << "Your job is Reaper." << endl;
             //AMB 11/22 - added confirmation stats
             finalJob = "Reaper";
-            hitPoints = 10 + this->conPoints;
+            setHitPoints(10);
             hitDice = "1d10";
             savingThrows1 = "STR";
             savingThrows2 = "WIS";
@@ -714,4 +725,175 @@ string jobs::rprSkills(){
     skills = rprSkills.at(skillChoice1) + " and " + rprSkills.at(skillChoice2);
 
     return skills;
+}
+
+void jobs::astCantrips(){
+    map<int, string> astCantripList{ {1, "Bladeward"}, {2, "Dancing Lights"}, {3, "Friends"}, {4, "Guidance"}, {5, "Light"}, {6, "Magic Stone"},
+                                     {7, "Mind Sliver"}, {8, "Message"}, {9, "Resistance"}, {10, "Sacred Flame"}, {11, "Spare the Dying"},
+                                     {12, "True Strike"}, {13, "Word Of Radiance"}};
+
+    vector<int> cantripChoices = {0, 0, 0};
+
+    cout << "Now it is time to choose your cantrips, you get to choose 3 from the following list: " << endl;
+
+    map<int, string>::iterator i;
+    int c = 1;
+    for(i = astCantripList.begin(); i != astCantripList.end(); i++){
+        cout << c << ": " << i->second << endl;
+        c++;
+    }
+
+    int cantripChoice = 0;
+    for(unsigned int i = 0; i < cantripChoices.size(); i++){
+        cout << "Choose cantrip choice " << i+1 << ": ";
+        cin >> cantripChoice;
+        while((cantripChoice < 1 || cantripChoice > 13) || ((count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)) == true)){
+            cout << "Invalid choice, please try again." << endl;
+            cin >> cantripChoice;
+        }
+        while(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, please use digits." << endl;;
+            cin >> cantripChoice;
+        }
+        cantripChoices.at(i) = cantripChoice;
+    }
+
+    string cantrips = astCantripList.at(cantripChoices.at(0)) + ", " + astCantripList.at(cantripChoices.at(1)) + ", " + astCantripList.at(cantripChoices.at(2));
+    setCantrips(cantrips);
+    cout << "Your chosen cantrips are: " << cantrips << endl;
+
+    map<int, string> astSpellList{{1, "Bane"}, {2, "Bless"}, {3, "Ceremony"}, {4, "Color Spray"},
+                                     {5, "Comprehend Languages"}, {6, "Cure Wounds"}, {7, "Detect Evil and Good"}, {8, "Detect Magic"},
+                                     {9, "Detect Poison and Disease"}, {10, "Faerie Fire"}, {11, "False Life"}, {12, "Gift of Alacrity"},
+                                     {13, "Guiding Bolt"}, {14, "Healing Word"}, {15, "Heroism"}, {16, "Hex"}, {17, "Identify"}, {18, "Illsory Script"},
+                                     {19, "Mage Armor"}, {20, "Magic Missile"}, {21, "Magnify Gravity"}, {22, "Sactuary"}, {23, "Shield of Faith"}, {24, "Sleep"},
+                                     {25, "Unseen Servant"}, {26, "Witch Bold"}};
+
+    cout << "Now you get to choose 2 spells from the following list: " << endl;
+
+    vector<int> spellChoices = {0, 0};
+    int spellChoice = 0;
+
+    cout << "Now it is time to choose your spells, you get to choose 6 from the following list: " << endl;
+
+    map<int, string>::iterator j;
+    int d = 1;
+    for(j = astSpellList.begin(); j != astSpellList.end(); j++){
+        cout << d << ": " << j->second << endl;
+        d++;
+    }
+
+    for(unsigned int i = 0; i < spellChoices.size(); i++){
+        cout << "Choose spell Choice " << i+1 << ": ";
+        cin >> spellChoice;
+        while((spellChoice < 1 || spellChoice > 26) || ((count(spellChoices.begin(), spellChoices.end(), spellChoice)) == true)){
+            cout << "Invalid choice, please try again." << endl;
+            cin >> spellChoice;
+        }
+        while(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, please use digits." << endl;;
+            cin >> spellChoice;
+        }
+
+        spellChoices.at(i) = spellChoice;
+    }
+
+    string chosenSpells = astSpellList.at(spellChoices.at(0)) + ", " + astSpellList.at(spellChoices.at(1));
+    setSpells(chosenSpells);
+    cout << "Your chosen spells are: " << chosenSpells << endl;
+
+    //draw from deck
+    cout << "Now drawing from your deck... " << endl;
+    map<int, string> drawFromDeck {{1, "The balance - Bonus 1d6 damage on all damage rolls. This bonus damage applies once per action, attack damage roll, bonus action and reaction."},
+                                   {2, "The Bole - All damage you take is reduced by 1d6."},
+                                   {3, "The Arrow - You gain one extra attack when you take the attack action."},
+                                   {4, "The Spear - Your attack rolls crit on a 19 or 20 die result."},
+                                   {5, "The Ewer - Temporarily provides one level 1 or 2 spell slot."},
+                                   {6, "The Spire - Temporarily provides 1, non-spell slot resource to an ally."}};
+    int diceRolls = rand() % 6 + 1;
+    string cardDrawn = drawFromDeck.at(diceRolls);
+    cout << "Your card draw is: " <<  cardDrawn << endl;
+    setCardDraw(cardDrawn);
+
+}
+
+void jobs::blmCantripsSpells(){
+    map<int, string> blmCantripList{{1, "Blade Ward"}, {2, "Chill Touch"}, {3, "Fire Bolt"}, {4, "Frostbite"}, {5, "Infestation"},
+                                    {6, "Lightning Lure"}, {7, "Mage Hand"}, {8, "Magic Stone"}, {9, "Produce Flame"}, {10, "Ray Of Frost"},
+                                    {11, "Sapping Sting"}, {12, "Shocking Grasp"}, {13, "Thaumaturgy"}, {14, "Toll the Dead"}};
+
+    vector<int> cantripChoices = {0, 0, 0};
+
+    cout << "Now it is time to choose your cantrips, you get to choose 3 from the following list: " << endl;
+
+    map<int, string>::iterator i;
+    int c = 1;
+    for(i = blmCantripList.begin(); i != blmCantripList.end(); i++){
+        cout << c << ": " << i->second << endl;
+        c++;
+    }
+
+    int cantripChoice = 0;
+    for(unsigned int i = 0; i < cantripChoices.size(); i++){
+        cout << "Choose cantrip choice " << i+1 << ": ";
+        cin >> cantripChoice;
+        while((cantripChoice < 1 || cantripChoice > 13) || ((count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)) == true)){
+            cout << "Invalid choice, please try again." << endl;
+            cin >> cantripChoice;
+        }
+        while(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, please use digits." << endl;;
+            cin >> cantripChoice;
+        }
+        cantripChoices.at(i) = cantripChoice;
+    }
+
+    string cantrips = blmCantripList.at(cantripChoices.at(0)) + ", " + blmCantripList.at(cantripChoices.at(1)) + ", " + blmCantripList.at(cantripChoices.at(2));
+    setCantrips(cantrips);
+    cout << "Your chosen cantrips are: " << cantrips << endl;
+
+    cout << endl << "Now you get to choose 6 spells from the following list to put into your spell book: " << endl;
+    map<int, string> blmSpellList{{1, "Absorb Elements"}, {2, "Burning Hands"}, {3, "Chaos Bolt"}, {4, "Detect Magic"}, {5, "Disguise Self"},
+            {6, "Expeditious Retreat"}, {7, "False Life"}, {8, "Feather Fall"}, {9, "Find Familiar"}, {10, "Hex"}, {11, "Ice Knife"},
+            {12, "Illusory Script"}, {13, "Inflict Wounds"}};
+
+    vector<int> spellChoices = {0, 0, 0, 0, 0, 0};
+    int spellChoice = 0;
+
+    cout << "Now it is time to choose your spells, you get to choose 6 from the following list: " << endl;
+
+    map<int, string>::iterator j;
+    int d = 1;
+    for(j = blmSpellList.begin(); j != blmSpellList.end(); j++){
+        cout << d << ": " << j->second << endl;
+        d++;
+    }
+
+    for(unsigned int i = 0; i < spellChoices.size(); i++){
+        cout << "Choose spell Choice " << i+1 << ": ";
+        cin >> spellChoice;
+        while((spellChoice < 1 || spellChoice > 13) || ((count(spellChoices.begin(), spellChoices.end(), spellChoice)) == true)){
+            cout << "Invalid choice, please try again." << endl;
+            cin >> spellChoice;
+        }
+        while(cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, please use digits." << endl;;
+            cin >> spellChoice;
+        }
+
+        spellChoices.at(i) = spellChoice;
+    }
+
+    string chosenSpells = blmSpellList.at(spellChoices.at(0)) + ", " + blmSpellList.at(spellChoices.at(1)) + ", " + blmSpellList.at(spellChoices.at(2)) +
+            ", " + blmSpellList.at(spellChoices.at(3)) + ", " + blmSpellList.at(spellChoices.at(4)) + ", " + blmSpellList.at(spellChoices.at(5));
+    setSpells(chosenSpells);
+    cout << "Your chosen spells are: " << chosenSpells << endl;
 }

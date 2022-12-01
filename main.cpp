@@ -3,6 +3,7 @@
 #include "randomDice.h"
 #include "races.h"
 #include "names.h"
+#include <string>
 using namespace std;
 
 
@@ -37,18 +38,19 @@ int main() {
 
     if(nameChoice == 1){
         cout << "Enter the name of your character: ";
-        cin >> characterName;
+        cin.ignore();
+        getline(cin, characterName);
+        cin.ignore();
         name.setCharacterName(characterName);
     } else if(nameChoice == 2){
         cout << "Generating random name." << endl;
-        characterName = name.randomName(characterRace, characterClan, characterSex);
-        name.setCharacterName(characterName);
+        name.randomName(characterRace, characterClan, characterSex);
     } else {
         cout << "Invalid choice" << endl;
     }
 
     cout << "Finally, let's roll the dice to see what your stats will be." << endl;
-   diceRolls.printStat();
+    diceRolls.printStat();
 
 
 
@@ -78,13 +80,17 @@ int main() {
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
     }
 
+    int totalConstitution = 0;
     cout << endl << "Constitution: " << diceRolls.getConStat();
     if(Race.getClanAbilityScore() == "Constitution"){
             cout << " +" << Race.getClanASIncreaseAmount() << " (clan)";
+            totalConstitution = Race.getClanASIncreaseAmount();
     }
     if(Race.getRaceAbilityScore() == "Constitution"){
         cout << " +" << Race.getRaceASIncreaseAmount() << " (race)";
+        totalConstitution = Race.getRaceASIncreaseAmount();
     }
+
 
     cout << endl << "Intelligence: " << diceRolls.getIntStat();
     if(Race.getClanAbilityScore() == "Intelligence"){
@@ -114,20 +120,21 @@ int main() {
 
     cout << endl << "Saving throws: " << job.getSavingThrows() << endl;
 
-    cout << endl << "Spells" << endl;
-    //list spells here
+    cout << endl << "Spells: " << job.getSpells() << endl;
+    cout << endl << "Cantrips: " << job.getCantrips() << endl;
+    cout << endl << "Draw: " << job.getCardDraw() << endl;
 
     cout << endl << "Skills: " << job.getSkills() << endl;
 
     cout << endl << "Hit Point Dice: " << job.getHitDice() << endl;
     //placeholder for pulling constitution for hit point calculation
-    job.setConPoints(0);
+    job.setConPoints(totalConstitution);
     cout << endl << "Current Hit Points: " << job.getHitPoints() << endl;
     cout << endl << "Speed: " << Race.getWalkingSpeed() << "ft " << endl;
 
     cout << endl << "Equipment: " << job.getStartingEquipment() << endl;
 
-    cout << "Enjoy your character! " << endl;
+    cout << endl << "Enjoy your character! " << endl;
 
 }
 

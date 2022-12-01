@@ -22,6 +22,10 @@ public:
     string skills;
     string startingEquipment;
     string proficiencyBonus;
+    string cantrips;
+    string spells;
+    string cardDraw;
+
 
 
 
@@ -65,6 +69,17 @@ public:
     string gnbSkills();
     string rprSkills();
 
+    void astCantrips();
+    void blmCantripsSpells();
+
+    void setCantrips(string);
+    void setSpells(string);
+
+    string getCantrips(){return cantrips;}
+    string getSpells(){return spells;}
+
+    string getCardDraw(){return cardDraw;}
+    void setCardDraw(string);
 
 };
 

@@ -37,14 +37,8 @@ int names::displayNameGenerator(){
     return nameChoice;
 }
 
-string names::chosenName(){
-    cout << "Enter the name of your character: ";
-    cin >> name;
-    return name;
-}
-
 //AMB- 11/15 added randomization for names based on race, clan, and charater's sex
-string names::randomName(string race, string clan, string sex){
+void names::randomName(string race, string clan, string sex){
     string firstName =  "";
     string lastName = "";
 
@@ -96,18 +90,18 @@ string names::randomName(string race, string clan, string sex){
     //randomly choose names based on their race, the clan, and their character's sex
     if(race == "Au Ra"){
         if(clan == "Raen"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = raenMNames.at(rand() % raenMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = raenFNames.at(rand() % raenFNames.size());
             }
             //randomize surname
             lastName = familyNames.at(rand() % familyNames.size());
 
         } else if(clan == "Xaela"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = XaelaMNames.at(rand() % XaelaMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = XaelaFNames.at(rand() % XaelaFNames.size());
             }
              //randomize surname
@@ -116,18 +110,21 @@ string names::randomName(string race, string clan, string sex){
 
     } else if(race == "Hyur") {
         if(clan == "Midlander"){
-            if(sex == "m"){
+            if(sex == "M"){
+                cout << "Randomizing first name" << endl;
                 firstName = midMNames.at(rand() % midMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = midFNames.at(rand() % midFNames.size());
             }
             //randomize surname
+            cout << "Randomizing last name" << endl;
             lastName = midSurname.at(rand() % midSurname.size());
 
+
         } else if(clan == "Highlander"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = highMNames.at(rand() % highMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = highFNames.at(rand() % highFNames.size());
             }
             //randomize surname
@@ -136,33 +133,33 @@ string names::randomName(string race, string clan, string sex){
 
     } else if(race == "Lalafell"){
         if(clan == "Plainsfolk"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = plainsMNames.at(rand() % plainsMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = plainsFNames.at(rand() % plainsFNames.size());
             }
 
         } else if(clan == "Dunesfolk"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = dunesMNames.at(rand() % dunesMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = dunesFNames.at(rand() % dunesFNames.size());
             }
         }
     } else if(race == "Miqo'te"){
         if(clan == "Sun"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunMNames.at(rand() % sunMNames.size());
                 lastName = "Tia"; //all last names of males in the seekers of the sun are Tia
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = sunFfchar.at(rand() % sunFfchar.size())  + "'" + sunFNames.at(rand() % sunFNames.size());
                 lastName = sunMNames.at(rand() % sunMNames.size()); //last names for female seekers are the first name of breeding male
             }
 
         } else if(clan == "Moon"){
-            if(sex == "m"){
+            if(sex == "M"){
                 firstName = moonMNames.at(rand() % moonMNames.size());
-            } else if(sex == "f"){
+            } else if(sex == "F"){
                 firstName = moonFNames.at(rand() % moonFNames.size());
             }
             //set last name of keepers of the moon
@@ -170,17 +167,15 @@ string names::randomName(string race, string clan, string sex){
         }
 
     } else if(race == "Viera") {
-        if(sex == "m"){
+        if(sex == "M"){
             firstName = vieraMNames.at(rand() % vieraMNames.size());
-        } else if(sex == "f"){
+        } else if(sex == "F"){
             firstName = vieraFNames.at(rand() % vieraFNames.size());
         }
     }
 
-    //set the randomly generated name
-    string randomName = firstName + " " + lastName;
-
-    return randomName;
+    //set the randomly generated name]
+    setCharacterName(firstName, lastName);
 }
 
 
@@ -191,6 +186,11 @@ string names::getCharacterName(){
 
 
 //sets character's name.
-void names::setCharacterName(string selectedName){
-    name = selectedName;
+void names::setCharacterName(string firstName, string lastName){
+    name = firstName + " " + lastName;
+}
+
+//set characters name (for own input)
+void names::setCharacterName(string characterName){
+    name = characterName;
 }
