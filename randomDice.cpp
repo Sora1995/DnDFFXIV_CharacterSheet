@@ -57,7 +57,7 @@ void randomDice::printStat()
         cout << "Roll " << i + 1 << ": " << diceRollValues.at(i) << ", ";
     }
 
-    cout << "Now, let's pick where you want your stat allocated. You cannot adjust your stats once you accept, so be sure you pick the one you want!" << endl;
+    cout << endl << "Now, let's pick where you want your stat allocated. You cannot adjust your stats once you accept, so be sure you pick the one you want!" << endl;
 
     int rollChoice = 0;
     for(unsigned int i = 0; i < diceRollValues.size(); i++){
