@@ -86,23 +86,30 @@ void races::displayRaces() {
     cout << "4. Miqo'te" << endl;
     cout << "5. Viera" << endl;
 
-    cin >> raceSelection;
+    bool validInput = false;
+    while(!validInput){
+        try{
+            cin >> raceSelection;
 
-    //if wrong input type is inputed by user
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> raceSelection;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(raceSelection < 1 || raceSelection > 5){
+                throw "Invalid range, please try again";
+            }
+            else{
+                listRaces(raceSelection);
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    //if the number entered is out of range
-    while(raceSelection < 1 || raceSelection > 5) {
-        cout << "Invalid Selection, please try again..." << endl;
-        continue;
-    }
-
-    listRaces(raceSelection);
 }
 
 void races::listRaces(int race) {
@@ -161,17 +168,27 @@ void races::listRaces(int race) {
         cout << "With the Hyur race, you get to choose what your ability score increase is. Your base walking speed is 30ft." << endl;
         cout << " Choose an ability score to increase by 1:" << endl;
         cout << "1. Strength" << endl << "2. Dexterity" << endl << "3. Constitution" << endl << "4. Intelligence" << endl << "5. Wisdom" << endl << "6. Charisma" << endl;
-        cin >> increaseChoice;
 
-        while(cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
+        bool validInput = false;
+        while(!validInput){
+        try{
             cin >> increaseChoice;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please use digits";
+            }
+            if(increaseChoice < 1 || increaseChoice > 5){
+                throw "Invalid range, please try again.";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
         }
-
-        while(increaseChoice < 1 || increaseChoice > 5) {
-            cout << "Invalid Selection, please try again..." << endl;
         }
 
         switch(increaseChoice){
@@ -372,24 +389,29 @@ void races::listRaces(int race) {
 int races::raceConfirmation(string race, string clan){
     int raceConfirm = 3;
 
-    //AMB to-do: add try/catch to make sure input is an int
     cout << "Your selected race is: " << race << endl << "Your selected clan is: " << clan << endl;
     cout << "Would you like to confirm this selection?" << endl << "1. Yes, confirm my selection." << endl << "2. No, I would like to reselect my race and clan." << endl;
-    cin >> raceConfirm;
-
-    //checks if the input is the correct input type
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> raceConfirm;
-    }
-
-    //checks to see if input is in range
-        while(raceConfirm < 1 || raceConfirm > 2) {
-            cout << "Invalid Selection, please try again..." << endl;
+    bool validInput = false;
+    while(!validInput){
+        try{
+            cin >> raceConfirm;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Invalid input, please use digits.";
+            }
+            if(raceConfirm < 1 || raceConfirm > 2){
+                throw "Invalid selection, please try again...";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
         }
-
+    }
     return raceConfirm;
 }
 

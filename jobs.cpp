@@ -1,6 +1,7 @@
 #include "jobs.h"
 #include <limits>
 #include <algorithm>
+#include <exception>
 
 
 jobs::jobs()
@@ -61,22 +62,31 @@ void jobs::displayJobs() {
     cout << "4. Gunbreaker" << endl;
     cout << "5. Reaper" << endl;
 
-    cin >> jobSelection;
+    bool validInput = false;
+    while(!validInput){
+        try{
+            cin >> jobSelection;
 
-    //checks to see if input is the right type
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;
-        cin >> jobSelection;
-    }
-    //checks to see if input is in range
-    while(jobSelection < 1 || jobSelection > 5) {
-        cout << "Invalid selection, please try again." << endl;
-        cin >> jobSelection;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(jobSelection < 1 || jobSelection > 5){
+                throw "Invalid range, please try again";
+            }
+            else{
+                viewList(jobSelection);
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    viewList(jobSelection);
+
 }
 
 void jobs::viewList(int job) {
@@ -247,20 +257,30 @@ int jobs::confirmation(int jobSelect){
 
     cout << "Confirm your selection of " << jobSelectString << " as your job." << endl;
     cout << "1. Yes I want to be a " << jobSelectString <<endl << "2. No, I want to reselect my job." << endl;
-    cin >> confirmJob;
 
-    //checks if the input is the correct input type
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;
-        cin >> confirmJob;
-    }
+    bool validInput = false;
+    while(!validInput){
+        try{
 
+            cin >> confirmJob;
 
-    while(confirmJob < 1 || confirmJob > 2){
-        cout << "Invalid selection, please try again.";
-        cin >> confirmJob;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(confirmJob < 1 || confirmJob > 2){
+                throw "Invalid range, please try again";
+            }
+            else{
+
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
     return confirmJob;
@@ -509,31 +529,56 @@ string jobs::astSkills(){
         c++;
     }
 
-    cin >> skillChoice1;
-    while(skillChoice1 < 1 || skillChoice1 > 6){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice1;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice1;
+    cout << "Choose skill 1: ";
+    bool validInput = false;
+    while(!validInput){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice1;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice1 < 1 || skillChoice1 > 6){
+            throw "Invalid range, please try again";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    //check to see if skillChoice2 is inputted correctly
-    cin >> skillChoice2;
-    while(((skillChoice2 < 1) || (skillChoice2 > 6)) || (skillChoice2 == skillChoice1)){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice2;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice2;
-    }
+    cout << "Choose your second skill: ";
+    bool validInput2 = false;
+    while(!validInput2){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice2;
 
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice2 < 1 || skillChoice2 > 6){
+                throw "Invalid range,  please try again";
+            }
+            if(skillChoice2 == skillChoice1){
+                throw "Second choice cannot be the same as the first one, please try again";
+            }
+            else{
+                validInput2 = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
+    }
     skills = astSkills.at(skillChoice1) + " and " + astSkills.at(skillChoice2);
     return skills;
 }
@@ -553,31 +598,56 @@ string jobs::blmSkills(){
         cout << c << ": " << i->second << endl;
         c++;
     }
-    cin >> skillChoice1;
 
-    //check to see if skillChoice1 is inputted correctly
-    while(skillChoice1 < 1 || skillChoice1 > 7){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice1;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice1;
+    cout << "Choose skill 1: ";
+    bool validInput = false;
+    while(!validInput){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice1;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice1 < 1 || skillChoice1 > 7){
+            throw "Invalid range, please try again";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    //check to see if skillChoice2 is inputted correctly
-    cin >> skillChoice2;
-    while(((skillChoice2 < 1) || (skillChoice2 > 7)) || (skillChoice2 == skillChoice1)){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice2;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice2;
+    cout << "Choose your second skill: ";
+    bool validInput2 = false;
+    while(!validInput2){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice2;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice2 < 1 || skillChoice2 > 7){
+                throw "Invalid range,  please try again";
+            }
+            if(skillChoice2 == skillChoice1){
+                throw "Second choice cannot be the same as the first one, please try again";
+            }
+            else{
+                validInput2 = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
     skills = bmlSkills.at(skillChoice1) + " and " + bmlSkills.at(skillChoice2);
@@ -600,31 +670,57 @@ string jobs::dncSkills(){
         cout << c << ": " << i->second << endl;
         c++;
     }
-    cin >> skillChoice1;
 
-    //check to see if skillChoice1 is inputted correctly
-    while(skillChoice1 < 1 || skillChoice1 > 6){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice1;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice1;
+    cout << "Choose skill 1: ";
+
+    bool validInput = false;
+    while(!validInput){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice1;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice1 < 1 || skillChoice1 > 6){
+            throw "Invalid range, please try again";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    //check to see if skillChoice2 is inputted correctly
-    cin >> skillChoice2;
-    while(((skillChoice2 < 1) || (skillChoice2 > 6)) || (skillChoice2 == skillChoice1)){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice2;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice2;
+    cout << "Choose your second skill: ";
+    bool validInput2 = false;
+    while(!validInput2){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice2;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice2 < 1 || skillChoice2 > 6){
+                throw "Invalid range,  please try again";
+            }
+            if(skillChoice2 == skillChoice1){
+                throw "Second choice cannot be the same as the first one, please try again";
+            }
+            else{
+                validInput2 = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
     skills = dncSkills.at(skillChoice1) + " and " + dncSkills.at(skillChoice2);
@@ -647,35 +743,57 @@ string jobs::gnbSkills(){
         cout << c << ": " << i->second << endl;
         c++;
     }
-    cin >> skillChoice1;
+    cout << "Choose skill 1: ";
+    bool validInput = false;
+    while(!validInput){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice1;
 
-    //check to see if skillChoice1 is inputted correctly
-    while(skillChoice1 < 1 || skillChoice1 > 8){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice1;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice1;
-    }
-
-    //check to see if skillChoice2 is inputted correctly
-    cin >> skillChoice2;
-    while(((skillChoice2 < 1) || (skillChoice2 > 8)) || (skillChoice2 == skillChoice1)){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice2;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice2;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice1 < 1 || skillChoice1 > 8){
+            throw "Invalid range, please try again";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
+    cout << "Choose your second skill: ";
+    bool validInput2 = false;
+    while(!validInput2){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice2;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice2 < 1 || skillChoice2 > 8){
+                throw "Invalid range,  please try again";
+            }
+            if(skillChoice2 == skillChoice1){
+                throw "Second choice cannot be the same as the first one, please try again";
+            }
+            else{
+                validInput2 = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
+    }
     skills = gnbSkills.at(skillChoice1) + " and " + gnbSkills.at(skillChoice2);
-
     return skills;
 }
 
@@ -694,36 +812,58 @@ string jobs::rprSkills(){
         cout << c << ": " << i->second << endl;
         c++;
     }
-    cin >> skillChoice1;
+    cout << "Choose skill 1: ";
+    bool validInput = false;
+    while(!validInput){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice1;
 
-    //check to see if skillChoice1 is inputted correctly
-    while(skillChoice1 < 1 || skillChoice1 > 6){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice1;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice1;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice1 < 1 || skillChoice1 > 6){
+            throw "Invalid range, please try again";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
-    cin >> skillChoice2;
+    cout << "Choose your second skill: ";
+    bool validInput2 = false;
+    while(!validInput2){
+        try{ //check to see if input is inputted correctly, if not throw an error and have them re-enter
+            cin >> skillChoice2;
 
-    //check to see if skillChoice2 is inputted correctly
-    while(((skillChoice2 < 1) || (skillChoice2 > 6)) || (skillChoice2 == skillChoice1)){
-        cout << "Invalid choice, try again" << endl;
-        cin >> skillChoice2;
-    }
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> skillChoice2;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please input a digit number";
+            }
+            if(skillChoice2 < 1 || skillChoice2 > 6){
+                throw "Invalid range,  please try again";
+            }
+            if(skillChoice2 == skillChoice1){
+                throw "Second choice cannot be the same as the first one, please try again";
+            }
+            else{
+                validInput2 = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
     skills = rprSkills.at(skillChoice1) + " and " + rprSkills.at(skillChoice2);
-
     return skills;
 }
 
@@ -746,18 +886,36 @@ void jobs::astCantrips(){
     int cantripChoice = 0;
     for(unsigned int i = 0; i < cantripChoices.size(); i++){
         cout << "Choose cantrip choice " << i+1 << ": ";
-        cin >> cantripChoice;
-        while((cantripChoice < 1 || cantripChoice > 13) || ((count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)) == true)){
-            cout << "Invalid choice, please try again." << endl;
+        bool validInput = false;
+        while(!validInput){
+        try{
+
             cin >> cantripChoice;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please use digits.";
+            }
+            if((cantripChoice < 1 || cantripChoice > 13)){
+                throw "Out of range, please try again.";
+            }
+            if(count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)){
+                throw "Cantrip choice cannot be the same as past choices.";
+            }
+
+            else{
+                cantripChoices.at(i) = cantripChoice;
+                validInput = true;
+
+            }
         }
-        while(cin.fail()) {
+        catch(const char *e){
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
-            cin >> cantripChoice;
+            cout << e << endl;
+            continue;
         }
-        cantripChoices.at(i) = cantripChoice;
+        }
+
     }
 
     string cantrips = astCantripList.at(cantripChoices.at(0)) + ", " + astCantripList.at(cantripChoices.at(1)) + ", " + astCantripList.at(cantripChoices.at(2));
@@ -787,19 +945,36 @@ void jobs::astCantrips(){
 
     for(unsigned int i = 0; i < spellChoices.size(); i++){
         cout << "Choose spell Choice " << i+1 << ": ";
-        cin >> spellChoice;
-        while((spellChoice < 1 || spellChoice > 26) || ((count(spellChoices.begin(), spellChoices.end(), spellChoice)) == true)){
-            cout << "Invalid choice, please try again." << endl;
+        bool validInput = false;
+        while(!validInput){
+        try{
+
             cin >> spellChoice;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please use digits.";
+            }
+            if((spellChoice < 1 || spellChoice > 26)){
+                throw "Out of range, please try again.";
+            }
+            if(count(spellChoices.begin(), spellChoices.end(), spellChoice)){
+                throw "Cantrip choice cannot be the same as past choices.";
+            }
+
+            else{
+                spellChoices.at(i) = spellChoice;
+                validInput = true;
+
+            }
         }
-        while(cin.fail()) {
+        catch(const char *e){
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
-            cin >> spellChoice;
+            cout << e << endl;
+            continue;
+        }
         }
 
-        spellChoices.at(i) = spellChoice;
     }
 
     string chosenSpells = astSpellList.at(spellChoices.at(0)) + ", " + astSpellList.at(spellChoices.at(1));
@@ -840,18 +1015,35 @@ void jobs::blmCantripsSpells(){
     int cantripChoice = 0;
     for(unsigned int i = 0; i < cantripChoices.size(); i++){
         cout << "Choose cantrip choice " << i+1 << ": ";
-        cin >> cantripChoice;
-        while((cantripChoice < 1 || cantripChoice > 13) || ((count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)) == true)){
-            cout << "Invalid choice, please try again." << endl;
+        bool validInput = false;
+        while(!validInput){
+        try{
+
             cin >> cantripChoice;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please use digits.";
+            }
+            if((cantripChoice < 1 || cantripChoice > 14)){
+                throw "Out of range, please try again.";
+            }
+            if(count(cantripChoices.begin(), cantripChoices.end(), cantripChoice)){
+                throw "Cantrip choice cannot be the same as past choices.";
+            }
+
+            else{
+                validInput = true;
+                cantripChoices.at(i) = cantripChoice;
+            }
         }
-        while(cin.fail()) {
+        catch(const char *e){
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
-            cin >> cantripChoice;
+            cout << e << endl;
+            continue;
         }
-        cantripChoices.at(i) = cantripChoice;
+        }
+
     }
 
     string cantrips = blmCantripList.at(cantripChoices.at(0)) + ", " + blmCantripList.at(cantripChoices.at(1)) + ", " + blmCantripList.at(cantripChoices.at(2));
@@ -877,19 +1069,33 @@ void jobs::blmCantripsSpells(){
 
     for(unsigned int i = 0; i < spellChoices.size(); i++){
         cout << "Choose spell Choice " << i+1 << ": ";
-        cin >> spellChoice;
-        while((spellChoice < 1 || spellChoice > 13) || ((count(spellChoices.begin(), spellChoices.end(), spellChoice)) == true)){
-            cout << "Invalid choice, please try again." << endl;
+        bool validInput = false;
+        while(!validInput){
+        try{
             cin >> spellChoice;
-        }
-        while(cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
-            cin >> spellChoice;
-        }
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Please use digits.";
+            }
+            if((spellChoice < 1 || spellChoice > 13)){
+                throw "Out of range, please try again.";
+            }
+            if(count(spellChoices.begin(), spellChoices.end(), spellChoice)){
+                throw "Cantrip choice cannot be the same as past choices.";
+            }
 
-        spellChoices.at(i) = spellChoice;
+            else{
+                spellChoices.at(i) = spellChoice;
+                validInput = true;
+            }
+        }
+        catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
+        }
     }
 
     string chosenSpells = blmSpellList.at(spellChoices.at(0)) + ", " + blmSpellList.at(spellChoices.at(1)) + ", " + blmSpellList.at(spellChoices.at(2)) +

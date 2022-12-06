@@ -20,18 +20,26 @@ int names::displayNameGenerator(){
     cout << "1. Input your own name." << endl;
     cout << "2. Random name - based off race and clan." << endl;
 
-    cin >> nameChoice;
-
-    while(cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        cout << "Invalid input, please use digits." << endl;;
-        cin >> nameChoice;
-    }
-
-    while(nameChoice < 1 || nameChoice > 2){
-        cout <<"Invalid choice, please try again" << endl;
-        cin >> nameChoice;
+    bool validInput = false;
+    while(!validInput){
+        try{
+            cin >> nameChoice;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                throw "Invalid input, please use digits";
+            }
+            if(nameChoice < 1 || nameChoice >2){
+                throw "Invalid choice, please try again.";
+            }
+            else{
+                validInput = true;
+            }
+        } catch(const char *e){
+            cin.clear();
+            cout << e << endl;
+            continue;
+        }
     }
 
     return nameChoice;
