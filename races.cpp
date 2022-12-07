@@ -109,7 +109,7 @@ void races::listRaces(int race) {
 
     if(race == 1){  //Au Ra
         raceString = "Au Ra";
-        cout << endl << "You have chosen Au Ra. The Au Ra hail from the east, and are marked by their scales and horns. These people have a stark difference in height between the the males and females of the species. The males tend to be much taller than the females and many other races, while the females on average are shorter than many of the other races." << endl;
+        cout << endl << "You have chosen Au Ra. The Au Ra hail from the east, and are marked by their scales and horns. These people have a stark difference in height between the males and females of the species. The males tend to be much taller than the females and many other races, while the females on average are shorter than many of the other races." << endl;
         cout << endl << "Within the Au Ra there are two clans, Xaela and Raen." << endl;
         cout << "The dark scaled Xaela are nomads who travel the Azim Steppe and have developed a wide variety of customs which change from tribe to tribe." << endl;
         cout << "The light scaled Raen live largely integrated into modern society, giving up their nomadic ways for peaceful coexistence with the other races." << endl;

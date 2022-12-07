@@ -127,7 +127,7 @@ int main() {
     cout << endl << "Skills: " << job.getSkills() << endl;
 
     cout << endl << "Hit Point Dice: " << job.getHitDice() << endl;
-    //placeholder for pulling constitution for hit point calculation
+
     job.setConPoints(totalConstitution);
     cout << endl << "Current Hit Points: " << job.getHitPoints() << endl;
     cout << endl << "Speed: " << Race.getWalkingSpeed() << "ft " << endl;
