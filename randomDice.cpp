@@ -69,23 +69,32 @@ void randomDice::printStat()
             cout << c << ": " << j->second << endl;
             c++;
         }
-        cin >> rollChoice;
 
-        //checks to see if the choice is in the range, and it hasn't been chosen already
-        while((rollChoice < 1 || rollChoice > 6) || (count(choices.begin(), choices.end(), rollChoice)) == true){
-            cout << "Invalid choice, choose a number in range, or make sure you haven't already chosen it." << endl;
-            cin >> rollChoice;
+        bool validInput = false;
+        while(!validInput){
+            try{
+                cin >> rollChoice;
+                if(cin.fail()){
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                    throw "Invalid choice, please use digits";
+                }
+                if(rollChoice < 1 || rollChoice > 6){
+                    throw "Invalid choice, please try again.";
+                }
+                if((count(choices.begin(), choices.end(), rollChoice)) == true){
+                    throw "Please select a number you haven't already chosen.";
+                }
+                else{
+                    validInput = true;
+                    choices.at(i) = rollChoice;
+                }
+            } catch(const char *e){
+                cin.clear();
+                cout << e << endl;
+                continue;
+            }
         }
-
-        while(cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input, please use digits." << endl;;
-            cin >> rollChoice;
-        }
-
-        choices.at(i) = rollChoice;
-
 
         map<int, string>::iterator it = stats.find(rollChoice);
         if (it != stats.end()){
