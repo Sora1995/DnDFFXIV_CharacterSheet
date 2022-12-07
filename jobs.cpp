@@ -139,7 +139,7 @@ void jobs::viewList(int job) {
             skills = blmSkills();
             cout << "Your skills are: " + skills << endl;
 
-            //TO-DO: black mage cantrips?
+            //choose cantrips and spells
             blmCantripsSpells();
 
         } else if(confirmJob == 2){
@@ -292,11 +292,11 @@ string jobs::blackMageEquipmentChoices(){
     string equipmentChoice = " ";
     cout << "With the Black Mage job you get the following starting equipment: " << endl;
     cout << "Dagger, a spellcasting focus (wand, cane, staff, etc.), and a spellbook" << endl << "You get to choose one of the following: (a) explorer's pack or (b) scholar's pack" << endl;
-    cin >> equipmentChoice;
+    getline(cin, equipmentChoice);
 
     while(equipmentChoice != "a" && equipmentChoice != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice;
+         getline(cin, equipmentChoice);
     }
 
     if(equipmentChoice == "a"){
@@ -315,11 +315,11 @@ string jobs::astEquipmentChoices(){
     string equipmentChoice = " ";
     cout << "With the Astrologian job you get the following starting equipment: " << endl;
     cout << "Dagger, Star globe, Divination deck " << endl << "You get to choose one of the following: (a) explorer's pack or (b) scholar's pack" << endl;
-    cin >> equipmentChoice;
+     getline(cin, equipmentChoice);
 
     while(equipmentChoice != "a" && equipmentChoice != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice;
+        getline(cin, equipmentChoice);
     }
 
     if(equipmentChoice == "a"){
@@ -343,10 +343,10 @@ string jobs::dancerEquipmentChoices(){
     cout << "A set of clothes, a set of bracelets and anklets for spell casting, and you also get to choose the following: " << endl;
 
     cout << "(a) two daggers or (b) two chakrams" << endl;
-    cin >> equipmentChoice1;
+    getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice1;
+        getline(cin, equipmentChoice1);
     }
     if(equipmentChoice1 == "a"){
         equipmentChoice1 = "Two daggers";
@@ -355,10 +355,10 @@ string jobs::dancerEquipmentChoices(){
     }
 
     cout << endl << "a (a) whip or (b) scimitar" <<endl;
-    cin >> equipmentChoice2;
+    getline(cin, equipmentChoice2);
     while(equipmentChoice2 != "a" && equipmentChoice2 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice2;
+        getline(cin, equipmentChoice2);
     }
     if(equipmentChoice2 == "a"){
         equipmentChoice2 = "A whip";
@@ -367,10 +367,10 @@ string jobs::dancerEquipmentChoices(){
     }
 
     cout << endl << "a (a) costume or (b) light armour" << endl;
-    cin >> equipmentChoice3;
+    getline(cin, equipmentChoice3);
     while(equipmentChoice3 != "a" && equipmentChoice3 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice3;
+        getline(cin, equipmentChoice3);
     }
     if(equipmentChoice3 == "a"){
         equipmentChoice3 = "Costume";
@@ -379,10 +379,10 @@ string jobs::dancerEquipmentChoices(){
     }
 
     cout << endl << "(a) an explorer's pack or (b) a entertainer's pack" << endl;
-    cin >> equipmentChoice4;
+    getline(cin, equipmentChoice4);
     while(equipmentChoice4 != "a" && equipmentChoice4 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice4;
+        getline(cin, equipmentChoice4);
     }
     if(equipmentChoice4 == "a"){
         equipmentChoice4 = "Costume";
@@ -406,10 +406,10 @@ string jobs::gunbreakerEquipmentChoices(){
     cout << "Smith's tools, martial weapon (already converted to a gun blade), and you get to choose the following: " << endl;
 
     cout << endl << "(a) scale mail or (b) leather armor" << endl;
-    cin >> equipmentChoice1;
+    getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice1;
+        getline(cin, equipmentChoice1);
     }
     if(equipmentChoice1 == "a"){
         equipmentChoice1 = "Scale mail";
@@ -418,10 +418,10 @@ string jobs::gunbreakerEquipmentChoices(){
     }
 
     cout << endl << "(a) a shield or (b) a pistol and 20 bullets" << endl;
-    cin >> equipmentChoice2;
+    getline(cin, equipmentChoice2);
     while(equipmentChoice2 != "a" && equipmentChoice2 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice2;
+        getline(cin, equipmentChoice2);
     }
     if(equipmentChoice2 == "a"){
         equipmentChoice2 = "Shield";
@@ -430,10 +430,10 @@ string jobs::gunbreakerEquipmentChoices(){
     }
 
     cout << endl << "(a) an explorer's pack or (b) a dungeoneer's pack" << endl;
-    cin >> equipmentChoice3;
+    getline(cin, equipmentChoice3);
     while(equipmentChoice3 != "a" && equipmentChoice3 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice3;
+        getline(cin, equipmentChoice3);
     }
     if(equipmentChoice3 == "a"){
         equipmentChoice3 = "explorer's pack";
@@ -459,10 +459,10 @@ string jobs::reaperEquipmentChoices(){
     cout << "A Momento bestowed to you by the voidsent, and you get to choose the following..." << endl;
 
     cout << "(a) Battle Scythe or (b) one martial melee weapon" << endl;
-    cin >> equipmentChoice1;
+    getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice1;
+        getline(cin, equipmentChoice1);
     }
     if(equipmentChoice1 == "a"){
         equipmentChoice1 = "Battle Scythe";
@@ -471,10 +471,10 @@ string jobs::reaperEquipmentChoices(){
     }
 
     cout << endl << "(a) two Handaxes or (b) a Light Crossbow with 20 bolts" << endl;
-    cin >> equipmentChoice2;
+    getline(cin, equipmentChoice2);
     while(equipmentChoice2 != "a" && equipmentChoice2 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice2;
+        getline(cin, equipmentChoice2);
     }
     if(equipmentChoice2 == "a"){
         equipmentChoice2 = "two Handaxes";
@@ -483,10 +483,10 @@ string jobs::reaperEquipmentChoices(){
     }
 
     cout << endl << "(a) scale mail or (b) light armor" << endl;
-    cin >> equipmentChoice3;
+    getline(cin, equipmentChoice3);
     while(equipmentChoice3 != "a" && equipmentChoice3 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice3;
+        getline(cin, equipmentChoice3);
     }
     if(equipmentChoice3 == "a"){
         equipmentChoice3 = "scale mail";
@@ -495,10 +495,10 @@ string jobs::reaperEquipmentChoices(){
     }
 
     cout << endl << "(a) a Dungeoneer's Pack or (b) an Explorer's Pack" << endl;
-    cin >> equipmentChoice4;
+    getline(cin, equipmentChoice4);
     while(equipmentChoice4 != "a" && equipmentChoice4 != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
-        cin >> equipmentChoice4;
+        getline(cin, equipmentChoice4);
     }
     if(equipmentChoice4 == "a"){
         equipmentChoice4 = "Dungeoneer's Pack";
