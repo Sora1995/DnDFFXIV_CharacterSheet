@@ -125,10 +125,10 @@ void races::listRaces(int race) {
         cout << "If you choose the Xaela clan, your Strength will increase by 2. If you choose Raen, your Charisma Score will increase by 1." << endl;
         cout << "Choose a clan to align with... 'Xaela', or 'Raen': " << endl;
 
-        cin >> clanSelection;
+        getline(cin, clanSelection);
         while (clanSelection != "Xaela" && clanSelection != "Raen"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
-            cin >> clanSelection;
+            getline(cin, clanSelection);
         }
 
         //AMB 11/8- Added confirmation and logic to increase the ability scores.
@@ -206,10 +206,10 @@ void races::listRaces(int race) {
         cout << "Midlander's ability score, intelligence, increases by 2. Highlander's ability score, strength, increases by 2." << endl;
         cout << "Choose a clan to align with... 'Midlander' or 'Highlander': " << endl;
 
-        cin >> clanSelection;
+        getline(cin, clanSelection);
         while (clanSelection != "Midlander" && clanSelection != "Highlander"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
-            cin >> clanSelection;
+            getline(cin, clanSelection);
         }
 
         //AMB 11/8- Added confirmation and logic to increase the ability scores.
@@ -255,10 +255,10 @@ void races::listRaces(int race) {
         cout << "If you choose the Plainsfolk, your Dexterity ability score will increase by 1. If you choose the Dunesfolk, your Intelligence ability score will increase by 1" << endl;
         cout << "Choose your clan to align with... 'Plainsfolk' or 'Dunesfolk':" << endl;
 
-        cin >> clanSelection;
+        getline(cin, clanSelection);
         while(clanSelection != "Plainsfolk" && clanSelection != "Dunesfolk"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
-            cin >> clanSelection;
+            getline(cin, clanSelection);
         }
 
         //AMB 11/8- Added confirmation and logic to increase the ability scores.
@@ -302,10 +302,10 @@ void races::listRaces(int race) {
         cout << "If you choose the Seekers of the Sun clan your Charisma ability score will increase by 1. If you choose the Keepers of the Moon clan, your Wisdom ability score will increase by 1." << endl;
         cout << "Choose the clan you would like to align with... 'Sun' or 'Moon': " << endl;
 
-        cin >> clanSelection;
+        getline(cin, clanSelection);
         while(clanSelection != "Sun" && clanSelection != "Moon"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
-            cin >> clanSelection;
+            getline(cin, clanSelection);
         }
 
         //AMB 11/8- Added confirmation and logic to increase the ability scores.
@@ -346,10 +346,10 @@ void races::listRaces(int race) {
         cout << "If you choose the Rava clan, your Wisdom ability score will increase by 1. If you choose Veena, your Intelligence ability score will increase by 1." << endl;
         cout << "Choose the clan you would like to align with... 'Rava' or 'Veena.': " << endl;
 
-        cin >> clanSelection;
+        getline(cin, clanSelection);
         while(clanSelection != "Rava" && clanSelection != "Veena"){
             cout << "Please enter your selection with the first letter capitalized." << endl;
-            cin >> clanSelection;
+            getline(cin, clanSelection);
         }
 
         //AMB 11/8- Added confirmation and logic to increase the ability scores.

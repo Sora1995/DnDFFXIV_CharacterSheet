@@ -25,11 +25,11 @@ int main() {
 
     cin.ignore();
     cout << "Is your character male or female?" << endl << "M for male " << endl << "F for Female" << endl;
-    cin >> characterSex;
+    getline(cin, characterSex);
 
     while(characterSex != "F" && characterSex != "M" ){
         cout << "Invalid selection, try again..." << endl;
-        cin >> characterSex;
+        getline(cin, characterSex);
     }
 
 
