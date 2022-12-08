@@ -2,6 +2,7 @@
 #include <limits>
 #include <algorithm>
 #include <exception>
+#include <time.h>
 
 
 jobs::jobs()
@@ -289,9 +290,10 @@ int jobs::confirmation(int jobSelect){
 //AMB 11/22 -adding starting equipment choices
 string jobs::blackMageEquipmentChoices(){
     string startingEquipment;
-    string equipmentChoice = " ";
+    string equipmentChoice = "";
     cout << "With the Black Mage job you get the following starting equipment: " << endl;
     cout << "Dagger, a spellcasting focus (wand, cane, staff, etc.), and a spellbook" << endl << "You get to choose one of the following: (a) explorer's pack or (b) scholar's pack" << endl;
+    cin.ignore();
     getline(cin, equipmentChoice);
 
     while(equipmentChoice != "a" && equipmentChoice != "b"){
@@ -934,7 +936,7 @@ void jobs::astCantrips(){
     vector<int> spellChoices = {0, 0};
     int spellChoice = 0;
 
-    cout << "Now it is time to choose your spells, you get to choose 6 from the following list: " << endl;
+    cout << "Now it is time to choose your spells, you get to choose 2 from the following list: " << endl;
 
     map<int, string>::iterator j;
     int d = 1;
@@ -989,6 +991,7 @@ void jobs::astCantrips(){
                                    {4, "The Spear - Your attack rolls crit on a 19 or 20 die result."},
                                    {5, "The Ewer - Temporarily provides one level 1 or 2 spell slot."},
                                    {6, "The Spire - Temporarily provides 1, non-spell slot resource to an ally."}};
+    srand((unsigned) time(NULL));
     int diceRolls = rand() % 6 + 1;
     string cardDrawn = drawFromDeck.at(diceRolls);
     cout << "Your card draw is: " <<  cardDrawn << endl;

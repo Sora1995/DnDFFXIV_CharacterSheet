@@ -20,6 +20,7 @@ int main() {
     string characterRace = Race.getRace(); //set local variables
     string characterClan = Race.getClan(); //set local variables
 
+
     cout << "Great! Next, pick your job from the list below." << endl;
     job.displayJobs();
 
@@ -27,6 +28,7 @@ int main() {
     cout << "Is your character male or female?" << endl << "M for male " << endl << "F for Female" << endl;
     getline(cin, characterSex);
 
+    cin.ignore();
     while(characterSex != "F" && characterSex != "M" ){
         cout << "Invalid selection, try again..." << endl;
         getline(cin, characterSex);
@@ -48,6 +50,7 @@ int main() {
     } else {
         cout << "Invalid choice" << endl;
     }
+
 
     cout << "Finally, let's roll the dice to see what your stats will be." << endl;
     diceRolls.printStat();
