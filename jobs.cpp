@@ -317,7 +317,8 @@ string jobs::astEquipmentChoices(){
     string equipmentChoice = " ";
     cout << "With the Astrologian job you get the following starting equipment: " << endl;
     cout << "Dagger, Star globe, Divination deck " << endl << "You get to choose one of the following: (a) explorer's pack or (b) scholar's pack" << endl;
-     getline(cin, equipmentChoice);
+    cin.ignore();
+    getline(cin, equipmentChoice);
 
     while(equipmentChoice != "a" && equipmentChoice != "b"){
         cout << "Invalid choice, please try again... enter a or b." << endl;
@@ -344,6 +345,7 @@ string jobs::dancerEquipmentChoices(){
     cout << "With the Dancer Job, you get the following starting equipment: " << endl;
     cout << "A set of clothes, a set of bracelets and anklets for spell casting, and you also get to choose the following: " << endl;
 
+    cin.ignore();
     cout << "(a) two daggers or (b) two chakrams" << endl;
     getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
@@ -407,6 +409,7 @@ string jobs::gunbreakerEquipmentChoices(){
     cout << "With the Gunbreaker job you get the following starting equipment: " << endl;
     cout << "Smith's tools, martial weapon (already converted to a gun blade), and you get to choose the following: " << endl;
 
+    cin.ignore();
     cout << endl << "(a) scale mail or (b) leather armor" << endl;
     getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
@@ -460,6 +463,7 @@ string jobs::reaperEquipmentChoices(){
     cout << "With the Reaper Job you get the following starting equipment: " << endl;
     cout << "A Momento bestowed to you by the voidsent, and you get to choose the following..." << endl;
 
+    cin.ignore();
     cout << "(a) Battle Scythe or (b) one martial melee weapon" << endl;
     getline(cin, equipmentChoice1);
     while(equipmentChoice1 != "a" && equipmentChoice1 != "b"){
